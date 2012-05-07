@@ -34,6 +34,9 @@ $status = $row['status'];
 $table = 'speclist';
 $ptable = 'spec';
 $sql = "SELECT $table.no AS pn, $ptable.* FROM $table INNER JOIN $ptable ON $table.spec = $ptable.no WHERE $table.no = '$no' ORDER BY no";
+//What gets you close to combining the two is 
+//SELECT speclist.spec AS no, drawinglist.drawing AS no, spec.rev, drawing.rev FROM spec JOIN speclist ON spec.no = speclist.spec JOIN drawinglist ON speclist.no = drawinglist.no JOIN drawing ON drawinglist.drawing = drawing.no WHERE speclist.no = '846000' AND drawinglist.no = '846000'
+
 $result = mysql_query($sql);
 ?>
 	<form id="lineitems">
