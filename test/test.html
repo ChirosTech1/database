@@ -1,0 +1,35 @@
+<html>
+<head>
+<script type="text/javascript">
+    function DisplayFormValues()
+    {
+        var str = '';
+	var pinfo = '';
+        var elem = document.getElementById('frmMain').elements;
+        for(var i = 0; i < elem.length; i++)
+        {
+            str += "<b>Type:</b>" + elem[i].type + "&nbsp&nbsp";
+            str += "<b>Name:</b>" + elem[i].name + "&nbsp;&nbsp;";
+            str += "<b>Value:</b><i>" + elem[i].value + "</i>&nbsp;&nbsp;";
+            str += "<BR>";
+	    pinfo += elem[i].name + "=" + elem[i].value + "&"
+        } 
+        document.getElementById('lblValues').innerHTML = pinfo;
+    }
+</script>
+</head>
+<body>
+    <form id="frmMain" name="frmMain">
+        <input type="hidden" name="ElemHidden" value="some hidden text" />
+        <input type="text" name="ElemText" value="some text" /><br />
+        <input type="text" name="ElemTex1" value="some text" /><br />
+        <input type="text" name="ElemTex2" value="some text" /><br />
+        <input type="text" name="ElemTex3" value="some text" /><br />
+        <textarea name="ElemTextArea">Some text area text</textarea><br />
+        <br />
+        <input type="button" value="Test" onclick="DisplayFormValues();" /> 
+    </form>
+    <hr />
+    <div id="lblValues"></div>
+</body>
+</html>

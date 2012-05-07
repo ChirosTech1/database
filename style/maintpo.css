@@ -1,0 +1,83 @@
+.header
+{
+border-right: 1px solid #000000;
+font-size:12px;
+text-align:justify;
+font-style:bold;
+}
+.field
+{
+border-right: 1px solid #000000;
+font-size:14px;
+text-align:center;
+}
+table.top
+{
+text-align:center;
+width:100%;
+border-collapse:collapse;
+}
+.head
+{
+vertical-align:text-top;
+font-size:18;
+}
+.headinfo
+{
+vertical-align:text-top;
+font-size:15;
+}
+.headaddress
+{
+vertical-align:text-top;
+font-size:11;
+}
+table.mid
+{
+text-align:center;
+width:100%;
+border-collapse:collapse;
+border: 1px solid black;
+}
+table.lines
+{
+width:100%;
+border-collapse:collapse;
+border: 1px solid black;
+font-size:11;
+}
+.line
+{
+border: 1px solid black;
+text-align:center;
+}
+.des
+{
+border: 1px solid black;
+text-align:justified;
+}
+table.bot
+{
+text-align:center;
+width:100%;
+border-collapse:collapse;
+border: 1px solid black;
+}
+pre.forminfo
+{
+font-size:9;
+font-family:"Arial", Arial, sans-serif;
+}
+@media all
+{
+  .page-break { display:none; }
+}
+
+@media print
+{
+  .page-break { display:block; page-break-before:always; }
+}
+body
+{
+font-family:"Arial", Arial, sans-serif;
+}

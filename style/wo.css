@@ -1,0 +1,113 @@
+.header
+{
+width:100%;
+font-size:18px;
+border-bottom:1px solid black;
+}
+.field
+{
+border-right: 1px solid #000000;
+font-size:14px;
+text-align:center;
+}
+table.top
+{
+text-align:center;
+width:100%;
+border-collapse:collapse;
+}
+.head
+{
+width:100%;
+vertical-align:text-top;
+font-size:16;
+}
+.formname
+{
+text-align:justify;
+vertical-align:text-top;
+font-size:20;
+}
+.headinfo
+{
+vertical-align:text-top;
+font-size:15;
+}
+.headaddress
+{
+vertical-align:text-top;
+font-size:14;
+}
+.no
+{
+font-size:15;
+text-align:center;
+border-collapse:collapse;
+}
+.address
+{
+text-align:justify;
+border-collapse:collapse;
+font-size:16;
+}
+table.mid
+{
+font-size:16;
+width:40%;
+border-collapse:collapse;
+}
+table.lines
+{
+width:100%;
+border-collapse:collapse;
+font-size:14;
+border-bottom: 1px solid black;
+}
+.headline
+{
+border-bottom: 1px solid black;
+text-align:center;
+}
+.line
+{
+height: 25;
+text-align:center;
+}
+.des
+{
+text-align:justified;
+}
+table.notes
+{
+width:100%;
+border-collapse:collapse;
+font-size:14;
+}
+.invoices
+{
+font-size:14;
+width:100%;
+border-collapse:collapse;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}
+.invinfo
+{
+height:20px;
+width:9%;
+border: 1px dashed black;
+text-align:center;
+}
+@media all
+{
+  .page-break { display:none; }
+}
+
+@media print
+{
+  .page-break { display:block; page-break-before:always; }
+}
+body
+{
+font-family:"Arial", Arial, sans-serif;
+}

@@ -1,0 +1,79 @@
+table.top
+{
+text-align:center;
+width:100%;
+border-collapse:collapse;
+}
+th.top
+{
+height:50px;
+border: 3px solid black;
+}
+table.mid
+{
+text-align:center;
+width:100%;
+border-collapse:collapse;
+}
+tr.mid
+{
+border: 1px solid black;
+height:40px;
+}
+th.mid
+{
+width:25%;
+}
+td.mid
+{
+width:25%;
+text-align:justify;
+}
+table.notes
+{
+}
+th.notes
+{
+text-align:justify;
+}
+td.notes
+{
+}
+textarea.notes
+{
+font-family:"Arial", Arial, sans-serif;
+border:none;
+}
+table.qc
+{
+position:relative;
+left:300px;
+font-size:12;
+width:380;
+}
+th.qc
+{
+text-align:justify;
+}
+td.qc
+{
+border-bottom:1px solid black;
+}
+pre.forminfo
+{
+font-size:9;
+font-family:"Arial", Arial, sans-serif;
+}
+@media all
+{
+  .page-break { display:none; }
+}
+
+@media print
+{
+  .page-break { display:block; page-break-before:always; }
+}
+body
+{
+font-family:"Arial", Arial, sans-serif;
+}
