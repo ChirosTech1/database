@@ -1,19 +1,4 @@
 //<![CDATA[
-function UpdateList(q,stype)
-{
-        var xhrlist = GetObject();
-        var pinfo = "list="+q + "&stype="+ stype;
-        var url = lineform;
-        AjaxCall(xhrlist,url,pinfo);
-        xhrlist.onreadystatechange = function ()
-        {
-                if (xhrlist.readyState==4 && xhrlist.status==200)
-                {
-                        document.getElementsByName(selectfield)[0].innerHTML=xhrlist.responseText;
-                }
-        }
-
-}
 function UpdateForm(q,live)
 {
 	var xhr = GetObject();
@@ -199,142 +184,15 @@ function UpdateLine(q,e)
 	}
 
 }
-function UpdateNote(q,e)
-{
-	if(e)
-		var id = e.id;
-	else
-		var id = 0;
-	//Get call no if long po
-	if(mainform == 'glongpo.php')
-		var callvalue = document.getElementsByName('callno')[0].value;
-	var linkvalue = document.getElementsByName('no')[0].value;
-	var callvalue;
-	var xhr4 = GetObject();
-	//define variables
-	if(callvalue)
-	var pinfo = "q="+q + "&linkvalue=" + linkvalue + "&callvalue=" + callvalue + FormValues('notes',id);
-	else
-	var pinfo = "q="+q + "&linkvalue=" + linkvalue + FormValues('notes',id);
-	var url = "../" + mainfile + "/" + noteform;
-	if (q == 'Delete')
-	{
-		if(confirm("Are you sure you want to Delete this Note?"))
-		{
-		AjaxCall(xhr4,url,pinfo);
-		}
-	}
-	else
-	{
-		AjaxCall(xhr4,url,pinfo);
-	}
-	xhr4.onreadystatechange = function ()
-	{
-		if (xhr4.readyState==4 && xhr4.status==200)
-		{
-			document.getElementById("note").innerHTML=xhr4.responseText;
-			if(e)
-			{
-				var elem = document.getElementById('notes').elements;
-				var obj = 0;
-				for (var i = 0; i < elem.length; i++)
-				{
-					if(elem[i].id == e.id)
-					{
-						if(elem[i].name == e.name)
-						{
-						i++
-						i++
-						var elid = elem[i].id;
-						var obj = document.getElementsByName(elem[i].name)[elid];
-						}
-					}
-				}
-				obj.focus();
-			}
-		}
-		if(q != 'update')
-		{
-			if(q == 'New ' + formtype || q == 'New')
-			{
-			EditForm(q);
-			}
-			else
-			EditForm();
-		}
-	}
-
-}
-function ApproveForm()
-{
-	var qcid = prompt("Please enter your QC stamp number.");
-	if(!qcid)
-	qcid = 0;
-	var xhr = GetObject();
-	//define variables
-	var pinfo = "q=Approve" + "&qcid=" + qcid + FormValues('main');
-	var url = "../" + mainfile + "/" + mainform;
-	AjaxCall(xhr,url,pinfo);
-	xhr.onreadystatechange = function()
-	{
-		if (xhr.readyState==4 && xhr.status==200)
-		{
-			//Parse JSON Data
-			var jsondata = JSON.parse(xhr.responseText);
-			//Retrieve all form elements and data
-			var elem = document.getElementById('main').elements;
-			if(jsondata)
-			{
-			   //Insert the updated info into html form
-			   for (var i = 0; i < elem.length; i++)
-		 	   {
-			   //gets JSON data based on elements on html form
-			   var data = jsondata[0].qcapprove;
-		 	   //insert data into the form
-			   document.getElementsByName('qcapprove')[0].value = data;
-			   }
-			   if(data)
-			   alert ("Order Approved!!!");
-			   else
-			   alert ("Order Not Approved!!!");
-			}
-		}
-	}
-}
-function RevDate(q)
-{
-	document.getElementById('date').value = q;
-}
 function PrintForm(q)
 {
 	var id = document.getElementById('id').value;
-	var pinfo = '';
-	var elem = document.getElementById('printform').elements;
-	for(var i = 0; i < elem.length; i++)
-	{
-		if(elem[i].checked == true && elem[i].id)
-		pinfo += "&" + elem[i].id + "=" + elem[i].value;
-		else if(elem[i].id)
-		pinfo += "&" + elem[i].id + "=0";
-	}
-	if(printform == 'pcertpo.php' && q)
-	{
-		if(document.getElementsByName('ordered')[0].value)
-			window.open('../' + mainfile + '/' + printform + '?id=' + id + "&print=" + q + pinfo,'Purchase Order Form','left=20,top=20,width=1000,height=500,toolbar=1,scrollbars=yes,resizable=0');
-		else
-		{
-			alert("Order must be approved before printing!");
-		}
-	}
-	else
-	{
 		if(q)
 		{
-			window.open('../' + mainfile + '/' + printform + '?id=' + id + "&print=" + q + pinfo, formtype + ' Form','left=20,top=20,width=1000,height=500,toolbar=1,scrollbars=yes,resizable=0');
+			window.open('../' + mainfile + '/' + printform + '?id=' + id + "&print=" + q, formtype + ' Form','left=20,top=20,width=1000,height=500,toolbar=1,scrollbars=yes,resizable=0');
 		}
 		else
-			window.open('../' + mainfile + '/' + printform + '?id=' + id + pinfo, formtype + ' Form','left=20,top=20,width=1000,height=500,toolbar=1,scrollbars=yes,resizable=0');
-	}
+			window.open('../' + mainfile + '/' + printform + '?id=' + id, formtype + ' Form','left=20,top=20,width=1000,height=500,toolbar=1,scrollbars=yes,resizable=0');
 }
 function FormValues(type,id)
 {

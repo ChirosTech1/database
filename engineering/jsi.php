@@ -41,6 +41,7 @@ $result = mysql_query($sql);
 <input type="button" value="Delete JSI" onclick="UpdateForm(this.value)"/>
 <input type="button" value="New JSI" onclick="UpdateForm(this.value)"/>
 <input type="button" value="Edit" onclick="EditForm(this.value)"/></p>
+<input type="button" value="Print JSI" onclick="PrintForm()"/>
 
 <form id = "main">
 <select name="menu" onchange="UpdateForm('menu')">
@@ -71,22 +72,6 @@ while ($row = mysql_fetch_array($result))
 </table>
 </form>
 <div id="lineitem" style="padding : 4px; width : 1000px; height : 1000px; overflow:auto;"></div>
-<div style="height:100px;"></div>
-<div id="note" style="padding : 4px; width : 1200px; height : 150px; overflow:auto;"></div>
-<form id="printform">
-<input type="button" value="Preview WO" onclick="PrintForm()"/>
-<input type="button" value="Print WO" onclick="PrintForm('print')"/>
-<input type="button" value="Invoices" onclick="Invoices(this.value)"/>
-<input type="button" value="New Invoice" onclick="Invoices(this.value)"/></p>
-<table>
-<tr>
-<th>Original</th>
-</tr>
-<tr>
-<td><input type="checkbox" checked="checked" id="1" value="Work Order"/></td>
-</tr>
-</table>
-</form>
 <?php
 //close mysql connection
 mysql_close($con);
