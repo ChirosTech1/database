@@ -1,0 +1,88 @@
+div.page_header
+{
+	width:100%;
+}
+table.page_header
+{
+	width:100%;
+}
+div.procedure
+{
+}
+table.procedure
+{
+	width:100%;
+	border-style:dashed;
+	border-width:1px;
+	border-collapse:collapse;
+}
+th.procedure
+{
+	border-style:dashed;
+	border-width:1px;
+}
+td.procedure
+{
+	border-style:dashed;
+	border-width:1px;
+}
+div.material
+{
+}
+table.material
+{
+	width:100%;
+	border-style:dashed;
+	border-width:1px;
+	border-collapse:collapse;
+}
+th.material
+{
+	border-style:dashed;
+	border-width:1px;
+}
+td.material
+{
+	border-style:dashed;
+	border-width:1px;
+}
+div.specs
+{
+}
+table.specs
+{
+	width:100%;
+	border-style:dashed;
+	border-width:1px;
+	border-collapse:collapse;
+}
+th.specs
+{
+	border-style:dashed;
+	border-width:1px;
+}
+td.specs
+{
+	border-style:dashed;
+	border-width:1px;
+}
+div.flysheet
+{
+}
+table.flysheet
+{
+	width:100%;
+	border-style:dashed;
+	border-width:1px;
+	border-collapse:collapse;
+}
+th.flysheet
+{
+	border-style:dashed;
+	border-width:1px;
+}
+td.flysheet
+{
+	border-style:dashed;
+	border-width:1px;
+}
