@@ -31,18 +31,19 @@ $status = $row['status'];
 </form>
 <?php
 //Define line SQL
-$table = 'speclist';
-$ptable = 'spec';
-$sql = "SELECT $table.no AS pn, $ptable.* FROM $table INNER JOIN $ptable ON $table.spec = $ptable.no WHERE $table.no = '$no' ORDER BY no";
-//What gets you close to combining the two is 
-//SELECT speclist.spec AS no, drawinglist.drawing AS no, spec.rev, drawing.rev FROM spec JOIN speclist ON spec.no = speclist.spec JOIN drawinglist ON speclist.no = drawinglist.no JOIN drawing ON drawinglist.drawing = drawing.no WHERE speclist.no = '846000' AND drawinglist.no = '846000'
-
+$stable = 'speclist';
+$sptable = 'spec';
+$dtable = 'drawinglist';
+$dptable = 'drawing';
+$list = "SELECT * FROM $stable s WHERE s.no='$no' UNION SELECT * FROM $dtable d WHERE d.no='$no'";
+$main = "SELECT s.no,s.rev,s.chg,s.note,s.type,s.status FROM $sptable s UNION SELECT d.no,d.rev,d.chg,d.note,d.cust,d.status FROM $dptable d";
+$sql = "SELECT * FROM ($list) list JOIN ($main) main ON list.spec = main.no ORDER BY spec";
 $result = mysql_query($sql);
 ?>
 	<form id="lineitems">
 	<table>
 	<tr><th height="16"></th></tr>
-	<tr><th colspan="2"><b>PN Tooling</b></th></tr>
+	<tr><th colspan="2"><b>PN Documents</b></th></tr>
 	<tr><th height="16"></th></tr>
 	<tr>
 	<th>Specification #</th>

@@ -483,33 +483,82 @@ $let++;
 .						.
 ----------------------------------------------!>
 <?php
-//Check to see if a flysheet is even needed
-$fsql = "SELECT * FROM matlist INNER JOIN ";
+//Get Flysheet Information from Document List
+$stable = 'speclist';
+$sptable = 'spec';
+$dtable = 'drawinglist';
+$dptable = 'drawing';
+
+/************************************************
+*						*
+*Need to change hard value before going live	*
+*Change to $no where 0800-620-004		*
+*						*
+************************************************/
+$list = "SELECT * FROM $stable s WHERE s.no='0800-620-004' UNION SELECT * FROM $dtable d WHERE d.no='0800-620-004'";
+$main = "SELECT s.no,s.rev,s.chg,s.note,s.type,s.status FROM $sptable s UNION SELECT d.no,d.rev,d.chg,d.note,d.cust,d.status FROM $dptable d";
+$fsql = "SELECT * FROM ($list) list JOIN ($main) main ON list.spec = main.no ORDER BY spec";
+$fresult = mysql_query($fsql);
+//Check to see if Flysheet needs to be printed
+$frow = mysql_fetch_array($fresult);
+if($frow[0])
+{
 ?>
-<div class="flysheet">
-<table class="flysheet">
-	<tr>
-		<th class="flysheet" colspan="15">FLYSHEET</th>
-	</tr><?php $pagecounter++;?>
-	<tr>
-		<th class="flysheet">No</th>
-		<th class="flysheet">Document #</th>
-		<th class="flysheet">Rev</th>
-		<th class="flysheet">Type</th>
-		<th class="flysheet">Stat</th>
-		<th class="flysheet">No</th>
-		<th class="flysheet">Document #</th>
-		<th class="flysheet">Rev</th>
-		<th class="flysheet">Type</th>
-		<th class="flysheet">Stat</th>
-		<th class="flysheet">No</th>
-		<th class="flysheet">Document #</th>
-		<th class="flysheet">Rev</th>
-		<th class="flysheet">Type</th>
-		<th class="flysheet">Stat</th>
-	</tr><?php $pagecounter++;?>
+	<div class="flysheet">
+	<table class="flysheet">
+	<!-- HEADER SECTION --!>
+		<tr>
+			<th class="flysheet" colspan="9">FlySheet</th>
+		</tr><?php $pagecounter++;?>
+		<tr>
+			<th class="flysheet">Document</th>
+			<th class="flysheet">Rev</th>
+			<th class="flysheet">Status</th>
+			<th class="flysheet">Document</th>
+			<th class="flysheet">Rev</th>
+			<th class="flysheet">Status</th>
+			<th class="flysheet">Document</th>
+			<th class="flysheet">Rev</th>
+			<th class="flysheet">Status</th>
+		</tr><?php $pagecounter++;?>
+<?php
+
+	//Loop through Documents 3 at a time
+	for($f = 0; $frow = mysql_fetch_array($fresult); $f++)
+	{
+			//Fill in data 3 rows at a time
+			if(fmod($f,3) != 0)
+			{
+?>
+				<td class="flysheet"><?php echo $frow['spec'];?></td>
+				<td class="flysheet"><?php echo $frow['rev'];?></td>
+				<td class="flysheet"><?php echo $frow['status'];?></td>
+<?php
+			}
+			//End 3 column and start new column
+			else
+			{
+				if($s != 0)
+				{
+?>
+					</tr><?php $pagecounter++;?>
+<?php
+				}
+?>
+			<tr>	
+				<td class="flysheet"><?php echo $frow['spec'];?></td>
+				<td class="flysheet"><?php echo $frow['rev'];?></td>
+				<td class="flysheet"><?php echo $frow['status'];?></td>
+<?php
+			}
+	}
+?>
 </table>
 </div>
+<?php
+}
+?>
+
 
 <?php echo $pagecounter;?>
 <?php
