@@ -15,7 +15,7 @@ else{
 //Database login
 require_once('/home/hamby/auth/dbinfo.php');
 //Maximum rows allowed on one page
-$pagehigh = 20;
+$pagehigh = 49;
 $pagecount = 0;
 $totalpages = 0;
 $totalrec = 0;
@@ -39,6 +39,43 @@ for($i = 0; $i < $num; ++$i)
 //Define Page counter 
 $pagecounter = 0;
 ?>
+
+
+
+<?php
+
+/********************************************************
+*							*
+*	2nd Page Header Section Defined as Variable	*
+*	Make sure to add $pagecounter++ after use	*
+*							*
+********************************************************/
+$header = '
+</table>
+</div>
+<div class="add_page_header">
+<table class="add_page_header">
+	<tr>
+		<th>JOB SUMMARY AND INSPECTION</th>
+	</tr>
+</table>
+</div>
+';
+$header_rows = 1;
+/********************************************************
+*							*
+*	Blank Rows to Add the bottom of Page		*
+*							*
+********************************************************/
+$blankrows = '
+	<tr>
+		<td class="blank_rows"></td>
+	</tr>
+';
+?>
+
+
+
 <!--
 ---------------------------------------------------------
 .							.
@@ -74,6 +111,7 @@ $pagecounter = 0;
 		<td>Remarks:  <?php echo $row['rmks'];?></td>
 		<td>Run__Panels @  <?php echo $row['ppp'];?> Parts/Panel</td>
 	</tr><?php $pagecounter++;?>
+</table>
 </div>
 <!--
 ---------------------------------------------------------
@@ -82,11 +120,9 @@ $pagecounter = 0;
 .							.
 ---------------------------------------------------------
 --!>
-
+<?php
+$procedure_header = '
 <div class="procedure">
-
-<!-- PROCEDURE HEADER --!>
-
 <table class="procedure">
 	<tr>
 		<th rowspan="2" class="procedure">##</th>
@@ -104,27 +140,40 @@ $pagecounter = 0;
 		<th rowspan="2" class="procedure">Rejs</th>
 		<th rowspan="2" class="procedure">ST</th>
 		<th rowspan="2" class="procedure">Date</th>
-	</tr><?php $pagecounter++;?>
+	</tr>
 	<tr>
 		<th class="procedure">In</th>
 		<th class="procedure">Out</th>
 		<th class="procedure">I</th>
 		<th class="procedure">O</th>
-	</tr><?php $pagecounter++;?>
-<?php
-
+	</tr>
+';
+$procedure_header_rows = 2;
+echo $procedure_header; $pagecounter = $pagecounter + $procedure_header_rows;
 /************************************************
 *						*
 *	Procedure Job Lines			*
 *						*
 ************************************************/
+//Define How many extra rows to add at the end
+$jextra = 5;
 
 //Get Job Descriptions based on Part Number
 $jsql = "SELECT * FROM $jtable WHERE pn = '$no' ORDER BY no";
 $jresult = mysql_query($jsql);
+
+//Set Max row widths
+$jobmaxrow = 27;
+$matspecmaxrow = 15;
+
 //Loop through all Jobs
 for($j = 1;$jrow = mysql_fetch_array($jresult);$j++)
 {
+	//Check String Length of Job Description/Matspec and increase Page counter if needed
+	if(strlen($crow['job']) > $jobmaxrow)
+		$pagecounter++;
+	if(strlen($crow['matspec']) > $matspecmaxrow)
+		$pagecounter++;
 	//Check for skipped Job numbers
 	if($jrow['no'] == $j)
 	{
@@ -147,7 +196,20 @@ for($j = 1;$jrow = mysql_fetch_array($jresult);$j++)
 		<td class="procedure"></td>
 		<td class="procedure"></td>
 		<td class="procedure"></td>
-	</tr><?php $pagecounter++;?>
+	</tr>
+<?php 
+		//Add 1 to pagecounter for row added
+		$pagecounter++; 
+		//Check to see if New page is required
+		if($pagecounter >= $pagehigh)
+		{
+			//If new page is required add new page
+			$pagecounter = 0;
+			echo $header;$pagecounter = $pagecounter + $header_rows;
+			//Add Header rows for Job Descriptions
+			echo $procedure_header;$pagecounter = $pagecounter + $procedure_header_rows;
+		}
+?>
 <?php
 	}
 	//Add Blank Spaces for Skipped Job numbers
@@ -175,7 +237,21 @@ for($j = 1;$jrow = mysql_fetch_array($jresult);$j++)
 		<td class="procedure"></td>
 		<td class="procedure"></td>
 		<td class="procedure"></td>
-	</tr><?php $pagecounter++;?>
+	</tr>
+<?php 
+		//Add 1 to pagecounter for row added
+		$pagecounter++; 
+		//Check to see if New page is required
+		if($pagecounter >= $pagehigh)
+		{
+			//If new page is required add new page
+			$pagecounter = 0;
+			echo $header;$pagecounter = $pagecounter + $header_rows;
+			//Add Header rows for Job Descriptions
+			echo $procedure_header;$pagecounter = $pagecounter + $procedure_header_rows;
+		}
+?>
+
 <?php	
 		//Add +1 to $j to increment
 		$j++;
@@ -200,12 +276,30 @@ for($j = 1;$jrow = mysql_fetch_array($jresult);$j++)
 		<td class="procedure"></td>
 		<td class="procedure"></td>
 		<td class="procedure"></td>
-	</tr><?php $pagecounter++;?>
+	</tr>
+<?php 
+		//Add 1 to pagecounter for row added
+		$pagecounter++; 
+		//Check to see if New page is required
+		if($pagecounter >= $pagehigh)
+		{
+			//If new page is required add new page
+			$pagecounter = 0;
+			echo $header;$pagecounter = $header_rows;
+			//Add Header rows for Job Descriptions
+			echo $procedure_header;$pagecounter = $pagecounter + $procedure_header_rows;
+		}
+?>
 <?php
 	}
 }
-//Add 5 extra rows to allow space
-for($e = 0;$e!=5;$e++)
+//Check to see if there is enough room to add extra rows
+if($pagecounter + $jextra >= $pagehigh)
+{
+	$jextra = $jextra - (($pagecounter + $jextra) - $pagehigh);
+}
+//Add $jextra extra rows to allow space
+for($e = 0;$e!=$jextra;$e++)
 {
 ?>
 	<tr>
@@ -234,19 +328,19 @@ for($e = 0;$e!=5;$e++)
 ?>
 </table>
 </div>
-
-<!-----------------------------------------------
-.						.
-.		Material List			.
-.						.
-----------------------------------------------!>
-
+<?php
+/************************************************
+*						*
+*		Material List			*
+*						*
+************************************************/
+$material_header = '
 <div class="material">
 <table class="material">
 	<tr>
 		<th class="material" colspan="7">Material List</th>
 		<th class="material" width="500px"></th>
-	</tr><?php $pagecounter++;?>
+	</tr>
 	<tr>
 		<th class="material">##</th>
 		<th class="material">Qty</th>
@@ -255,20 +349,82 @@ for($e = 0;$e!=5;$e++)
 		<th class="material">Specification</th>
 		<th class="material">Certs</th>
 		<th class="material"></th>
-	</tr><?php $pagecounter++;?>
-
-<?php
+	</tr>
+';
+$material_header_rows = 2;
 /************************************************
 *						*
 *	Material List Lines			*
 *						*	
 ************************************************/
+
+//Define How many extra rows to add at the end
+$mextra = 4;
+
 //Get Materials based on Part Number
 $msql = "SELECT $mtable.*, material.pn AS matpn, material.des AS matdes, material.type AS mattype, material.spec AS matspec FROM $mtable INNER JOIN material ON $mtable.mat = material.no WHERE $mtable.pn = '$no' ORDER BY no";
+
+
+//Set Max character row widths
+$qtymaxrow = 9;
+$matmaxrow = 45;
+$matpnmaxrow = 45;
+$matdesmaxrow = 45;
+$matspecmaxrow = 45;
+//Calculate How many rows and check for needed page break
+$cresult = mysql_query($msql);
+while($crow = mysql_fetch_array($cresult))
+{
+	//Check String Length of columns and increase Page counter if needed
+	if(strlen($crow['qty']) > $qtymaxrow)
+		$pagecounter++;
+	if(strlen($crow['mat']) > $matmaxrow)
+		$pagecounter++;
+	if(strlen($crow['matpn']) > $matpnmaxrow)
+		$pagecounter++;
+	if(strlen($crow['matdes']) > $matdesmaxrow)
+		$pagecounter++;
+	if(strlen($crow['matspec']) > $matspecmaxrow)
+		$pagecounter++;
+	//Get last number
+	$mlast = $crow['no'];
+}
+//Add Header and Extra rows to get final row count of Materials
+$mlast = $mlast + 2 + $mextra;
+
+
+//Check to see if there is enough room on page to print Material list
+if($pagecounter + $mlast > $pagehigh)
+{
+	//Add Filler rows at bottom of page
+	$howmanyrows = $pagehigh - $pagecounter;
+?>
+	<div class="blank_rows">
+	<table class="blank_rows">
+<?php
+	for ($b = 0;$howmanyrows>$b;$b++)
+	{
+		echo $blankrows;
+	}
+?>
+	</table>
+	</div>
+<?php
+	//Add New Page Header row (this includes a page break)
+	echo $header;$pagecounter = $pagecounter + $header_rows;
+	echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+}
+else
+{
+	echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+}
+
+
+//Print out Material List
 $mresult = mysql_query($msql);
 for($m = 1;$mrow = mysql_fetch_array($mresult);$m++)
 {
-	//Check for skipped Job numbers
+	//Check for skipped Material numbers
 	if($mrow['no'] == $m)
 	{
 ?>
@@ -281,7 +437,20 @@ for($m = 1;$mrow = mysql_fetch_array($mresult);$m++)
 		<td class="material"><?php echo $mrow['matspec'];?></td>
 		<td class="material"></td>
 		<td class="material"></td>
-	</tr><?php $pagecounter++;?>
+	</tr>
+<?php 
+		//Add 1 to pagecounter for row added
+		$pagecounter++; 
+		//Check to see if New page is required
+		if($pagecounter >= $pagehigh)
+		{
+			//If new page is required add new page
+			$pagecounter = 0;
+			echo $header;$pagecounter = $pagecounter + $header_rows;
+			//Add Header rows for Material Descriptions
+			echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+		}
+?>
 <?php
 	}
 	//Add Blank Spaces for Skipped Job numbers
@@ -300,7 +469,20 @@ for($m = 1;$mrow = mysql_fetch_array($mresult);$m++)
 		<td class="material"></td>
 		<td class="material"></td>
 		<td class="material"></td>
-	</tr><?php $pagecounter++;?>
+	</tr>
+<?php 
+		//Add 1 to pagecounter for row added
+		$pagecounter++; 
+		//Check to see if New page is required
+		if($pagecounter >= $pagehigh)
+		{
+			//If new page is required add new page
+			$pagecounter = 0;
+			echo $header;$pagecounter = $pagecounter + $header_rows;
+			//Add Header rows for Material Descriptions
+			echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+		}
+?>
 <?php	
 	//Add +1 to $m to increment
 	$m++;
@@ -316,14 +498,33 @@ for($m = 1;$mrow = mysql_fetch_array($mresult);$m++)
 		<td class="material"><?php echo $mrow['matspec'];?></td>
 		<td class="material"></td>
 		<td class="material"></td>
-	</tr><?php $pagecounter++;?>
+	</tr>
+<?php 
+		//Add 1 to pagecounter for row added
+		$pagecounter++; 
+		//Check to see if New page is required
+		if($pagecounter >= $pagehigh)
+		{
+			//If new page is required add new page
+			$pagecounter = 0;
+			echo $header;$pagecounter = $pagecounter + $header_rows;
+			//Add Header rows for Material Descriptions
+			echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+		}
+?>
 
 <?php
 
 	}
 }
-//Add 4 extra rows to allow space
-for($e = 0;$e!=4;$e++)
+//Check to see if there is enough room to add extra rows
+if($pagecounter + $mextra >= $pagehigh)
+{
+	$mextra = $mextra - (($pagecounter + $mextra) - $pagehigh);
+}
+
+//Add $mextra extra rows to allow space
+for($e = 0;$e!=$mextra;$e++)
 {
 ?>
 	<tr>
@@ -344,6 +545,7 @@ for($e = 0;$e!=4;$e++)
 ?>
 </table>
 </div>
+
 
 <!-----------------------------------------------
 .						.

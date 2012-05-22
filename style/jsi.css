@@ -1,3 +1,8 @@
+div,table,th,td
+{
+	font-family:"Courier New", Courier, Monospace;
+	font-size:10pt;
+}
 div.page_header
 {
 	width:100%;
@@ -5,6 +10,30 @@ div.page_header
 table.page_header
 {
 	width:100%;
+}
+div.add_page_header
+{
+
+}
+table.add_page_header
+{
+	page-break-before:always;
+}
+div.blank_rows
+{
+}
+table.blank_rows
+{
+	width:100%;
+	border-style:dashed;
+	border-width:1px;
+	border-collapse:collapse;
+}
+td.blank_rows
+{
+	border-style:dashed;
+	border-width:1px;
+	height:16px;
 }
 div.procedure
 {
@@ -65,6 +94,7 @@ td.specs
 {
 	border-style:dashed;
 	border-width:1px;
+/*	white-space:nowrap;*/
 }
 div.flysheet
 {
