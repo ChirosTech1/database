@@ -216,7 +216,7 @@ for($j = 1;$jrow = mysql_fetch_array($jresult);$j++)
 	else
 	{
 	//Keep adding blank numbers until a valid job is found
-	while($jrow['no'] != $j)
+	while($jrow['no'] > $j)
 	{
 ?>
 	<tr>
@@ -456,61 +456,61 @@ for($m = 1;$mrow = mysql_fetch_array($mresult);$m++)
 	//Add Blank Spaces for Skipped Job numbers
 	else
 	{
-	//Keep adding blank numbers until a valid job is found
-	while($mrow['no'] != $m)
-	{
-?>
-	<tr>
-		<td class="material"><?php echo $m;?></td>
-		<td class="material"></td>
-		<td class="material"></td>
-		<td class="material"></td>
-		<td class="material"></td>
-		<td class="material"></td>
-		<td class="material"></td>
-		<td class="material"></td>
-	</tr>
-<?php 
-		//Add 1 to pagecounter for row added
-		$pagecounter++; 
-		//Check to see if New page is required
-		if($pagecounter >= $pagehigh)
+		//Keep adding blank numbers until a valid job is found
+		for($m = $m;$mrow['no'] > $m;$m++)
 		{
-			//If new page is required add new page
-			$pagecounter = 0;
-			echo $header;$pagecounter = $pagecounter + $header_rows;
-			//Add Header rows for Material Descriptions
-			echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
-		}
+?>
+		<tr>
+			<td class="material"><?php echo $m;?></td>
+			<td class="material"></td>
+			<td class="material"></td>
+			<td class="material"></td>
+			<td class="material"></td>
+			<td class="material"></td>
+			<td class="material"></td>
+			<td class="material"></td>
+		</tr>
+<?php 
+			//Add 1 to pagecounter for row added
+			$pagecounter++; 
+			//Check to see if New page is required
+			if($pagecounter >= $pagehigh)
+			{
+				//If new page is required add new page
+				$pagecounter = 0;
+				echo $header;$pagecounter = $pagecounter + $header_rows;
+				//Add Header rows for Material Descriptions
+				echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+			}
 ?>
 <?php	
-	//Add +1 to $m to increment
-	$m++;
-	}
-	//Add Valid Material Number after blanks are added
-?>
-	<tr>
-		<td class="material"><?php echo $mrow['no'];?></td>
-		<td class="material"><?php echo $mrow['qty'] . " " . $mrow['unit'];?></td>
-		<td class="material"><?php echo $mrow['mat'];?></td>
-		<td class="material"><?php echo $mrow['matpn'] . " " . $mrow['mattype'];?></td>
-		<td class="material"><?php echo $mrow['matdes'];?></td>
-		<td class="material"><?php echo $mrow['matspec'];?></td>
-		<td class="material"></td>
-		<td class="material"></td>
-	</tr>
-<?php 
-		//Add 1 to pagecounter for row added
-		$pagecounter++; 
-		//Check to see if New page is required
-		if($pagecounter >= $pagehigh)
-		{
-			//If new page is required add new page
-			$pagecounter = 0;
-			echo $header;$pagecounter = $pagecounter + $header_rows;
-			//Add Header rows for Material Descriptions
-			echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+			//Add +1 to $m to increment
+		//	$m++;
 		}
+		//Add Valid Material Number after blanks are added
+?>
+		<tr>
+			<td class="material"><?php echo $mrow['no'];?></td>
+			<td class="material"><?php echo $mrow['qty'] . " " . $mrow['unit'];?></td>
+			<td class="material"><?php echo $mrow['mat'];?></td>
+			<td class="material"><?php echo $mrow['matpn'] . " " . $mrow['mattype'];?></td>
+			<td class="material"><?php echo $mrow['matdes'];?></td>
+			<td class="material"><?php echo $mrow['matspec'];?></td>
+			<td class="material"></td>
+			<td class="material"></td>
+		</tr>
+<?php 
+			//Add 1 to pagecounter for row added
+			$pagecounter++; 
+			//Check to see if New page is required
+			if($pagecounter >= $pagehigh)
+			{
+				//If new page is required add new page
+				$pagecounter = 0;
+				echo $header;$pagecounter = $pagecounter + $header_rows;
+				//Add Header rows for Material Descriptions
+				echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+			}
 ?>
 
 <?php
@@ -616,7 +616,7 @@ for($s = 0; $srow = mysql_fetch_array($sresult); $s++)
 	else
 	{
 		//Continue to fill in blank rows until valid letter is found
-		while($srow['let'] != $let)
+		while($srow['let'] > $let || strlen($srow['let']) > strlen($let))
 		{
 			//Fill in data 3 rows at a time
 			if(fmod($s,3) != 0)
@@ -762,7 +762,6 @@ if($frow[0])
 ?>
 
 
-<?php echo $pagecounter;?>
 <?php
 
 
