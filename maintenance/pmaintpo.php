@@ -267,7 +267,7 @@ if($k < $pagehigh)
 <td class="header" width="50%">Purchase Order Number must appear on all invoice-packages, etc. Please notify us if you are unable to complete order.</td>
 </tr>
 </table>
-<p>ADM036 09/11    Hamby Corporation: 27704 Avenue Scott, Valencia, CA 92351 / (661) 257-1924 F:(661) 257-1213</p>
+<p>ADM036 09/11    Hamby Corporation: 27704 Avenue Scott, Valencia, CA 91355 / (661) 257-1924 F:(661) 257-1213</p>
 </form>
 <?php
 //Page numbers
