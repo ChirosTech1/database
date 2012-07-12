@@ -95,7 +95,23 @@ switch ($q)
 		$due = $wolineqty - $invlineqty;
 		mysql_query("UPDATE $table SET due = '$due' WHERE id = '$id'");
 		mysql_query("UPDATE $ptable SET due = '$due' WHERE no='$wo' AND line='$line'");
-		//Update po table to reflect totals
+		//Update WO table if WO is Closed
+		$wolineqty = mysql_fetch_array(mysql_query("SELECT SUM(qty) AS qty FROM woline WHERE no='$wo'"));
+		$wolineqty = $wolineqty['qty'];
+		$invlineqty = mysql_fetch_array(mysql_query("SELECT SUM(qty) AS qty FROM invline WHERE wo='$wo'"));
+		$invlineqty = $invlineqty['qty'];
+		if ($invlineqty && $wolineqty - $invlineqty <= '0')
+		{
+			//Update WO to Closed
+			mysql_query("UPDATE wo SET stat = 'Closed' WHERE no = '$linkvalue'");
+		}
+		else
+		{
+			//Update WO to Open
+			mysql_query("UPDATE wo SET stat = 'Open' WHERE no = '$linkvalue'");
+		}
+		
+		//Update inv table to reflect totals
 		mysql_query("UPDATE inv SET tot = (SELECT SUM(lp) FROM invline WHERE no = '$linkvalue') + shpchrg WHERE no = '$linkvalue'");
 		$sql = "SELECT * $dateformat FROM $table WHERE no = '$linkvalue' ORDER BY $primaryfield";
 		break;

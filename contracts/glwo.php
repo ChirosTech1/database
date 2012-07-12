@@ -138,6 +138,27 @@ switch ($q)
 	case "update":
 		if($q == 'update')
 		{
+		//Roll Rev If Neccessary
+		//Get Current PN and REV
+		$sql = "SELECT pn, rev FROM $table WHERE id = '$id'";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		if($row['pn'] != $pn || $row['rev'] != $rev)
+		{
+			//Check if WO has been released
+			$sql = "SELECT eng, qc, mat, purch, plan, cont, rev FROM $ptable WHERE no = '$linkvalue'";
+			$result = mysql_query($sql);
+			$prow = mysql_fetch_array($result);
+			if ($prow['eng'] != '0000-00-00 00:00:00' || $prow['qc'] != '0000-00-00 00:00:00' || $prow['mat'] != '0000-00-00 00:00:00' || $prow['purch'] != '0000-00-00 00:00:00' || $prow['plan'] != '0000-00-00 00:00:00' || $prow['cont'] != '0000-00-00 00:00:00')
+			{
+				//Update REV
+				$prev = $prow['rev'] + 1;
+				//Update WO Rev and Force Rerelease of WO
+				mysql_query("UPDATE $ptable SET rev = '$prev', eng = '0000-00-00 00:00:00', qc = '0000-00-00 00:00:00', mat = '0000-00-00 00:00:00', purch = '0000-00-00 00:00:00', plan = '0000-00-00 00:00:00', cont = '0000-00-00 00:00:00' WHERE no = '$linkvalue'");
+			}
+			
+		}
+		
 		//Update Query Variable
 		for($i = 0; $i < $num; ++$i)
 		{

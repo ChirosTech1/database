@@ -117,7 +117,6 @@ for ($i=0;$row = mysql_fetch_array($result);$i++)
 	<td><input type="text" id="<?php echo $i;?>" name="note" size="75" value="<?php echo htmlspecialchars($row['note']);?>" onchange="UpdateNote('update',this)"/></td>
 	<td><input type="text" id="<?php echo $i;?>" name="auth" size="1" value="<?php echo $row['auth'];?>" onchange="UpdateNote('update',this)"/></td>
 	<td><input type="text" id="<?php echo $i;?>" name="date" size="10" value="<?php echo $row['ndate'];?>" onchange="UpdateNote('update',this)"/></td>
-	<td><input type="button" id="<?php echo $i;?>" name="delete" value="Delete" onclick="UpdateNote(this.value,this)"/></td>
 	</tr>
 <?php
 }
