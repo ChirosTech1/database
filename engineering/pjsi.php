@@ -339,7 +339,7 @@ $material_header = '
 <table class="material">
 	<tr>
 		<th class="material" colspan="7">Material List</th>
-		<th class="material" width="500px"></th>
+		<th class="material" width="220px"></th>
 	</tr>
 	<tr>
 		<th class="material">##</th>
@@ -697,7 +697,7 @@ $dptable = 'drawing';
 *Change to $no where 0800-620-004		*
 *						*
 ************************************************/
-$list = "SELECT * FROM $stable s WHERE s.no='0800-620-004' UNION SELECT * FROM $dtable d WHERE d.no='0800-620-004'";
+$list = "SELECT * FROM $stable s WHERE s.no='$no' UNION SELECT * FROM $dtable d WHERE d.no='$no'";
 $main = "SELECT s.no,s.rev,s.chg,s.note,s.type,s.status FROM $sptable s UNION SELECT d.no,d.rev,d.chg,d.note,d.cust,d.status FROM $dptable d";
 $fsql = "SELECT * FROM ($list) list JOIN ($main) main ON list.spec = main.no ORDER BY spec";
 $fresult = mysql_query($fsql);
