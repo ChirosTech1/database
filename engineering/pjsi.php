@@ -85,31 +85,31 @@ $blankrows = '
 --!>
 <div class="page_header">
 <table class="page_header">
-	<tr>
-		<td>PTH#______________</td>
-		<th rowspan="2">JOB SUMMARY AND INSPECTION</th>
-		<td>JSI#___________________</td>
+	<tr class="page_header">
+		<td class="page_header">PTH#______________</td>
+		<th class="page_header" rowspan="2">JOB SUMMARY AND INSPECTION</th>
+		<td class="page_header">JSI#___________________</td>
 	</tr><?php $pagecounter++;?>
-	<tr>
-		<td>Final Assembly: <?php echo $row['final'];?></td>
-		<td>Page 1 of ---</td>
-	</tr><?php $pagecounter++;?>
-</table>
-<table class="page_header">
-	<tr>
-		<td>Date Due:______________</td>
-		<td>Qty Due:_____</td>
-		<td>Qty:____</td>
-		<td>SN:______________</td>
-		<td>WO:______________</td>
-		<td>Cust:_______________</td>
+	<tr class="page_header">
+		<td class="page_header">Final Assembly: <?php echo $row['final'];?></td>
+		<td class="page_header">Page 1 of ---</td>
 	</tr><?php $pagecounter++;?>
 </table>
 <table class="page_header">
-	<tr>
-		<td>Part Number: <?php echo $row['no'];?></td>
-		<td>Remarks:  <?php echo $row['rmks'];?></td>
-		<td>Run__Panels @  <?php echo $row['ppp'];?> Parts/Panel</td>
+	<tr class="page_header">
+		<td class="page_header">Date Due:______________</td>
+		<td class="page_header">Qty Due:_____</td>
+		<td class="page_header">Qty:____</td>
+		<td class="page_header">SN:______________</td>
+		<td class="page_header">WO:______________</td>
+		<td class="page_header">Cust:_______________</td>
+	</tr><?php $pagecounter++;?>
+</table>
+<table class="page_header">
+	<tr class="page_header">
+		<td class="page_header">Part Number: <?php echo $row['no'];?></td>
+		<td class="page_header">Remarks:  <?php echo $row['rmks'];?></td>
+		<td class="page_header">Run__Panels @  <?php echo $row['ppp'];?> Parts/Panel</td>
 	</tr><?php $pagecounter++;?>
 </table>
 </div>
@@ -339,7 +339,7 @@ $material_header = '
 <table class="material">
 	<tr>
 		<th class="material" colspan="7">Material List</th>
-		<th class="material" width="220px"></th>
+		<th class="material" width="200px"></th>
 	</tr>
 	<tr>
 		<th class="material">##</th>
@@ -347,7 +347,7 @@ $material_header = '
 		<th class="material">PN</th>
 		<th class="material" colspan="2">Description</th>
 		<th class="material">Specification</th>
-		<th class="material">Certs</th>
+		<th class="material" width="70">Certs</th>
 		<th class="material"></th>
 	</tr>
 ';
