@@ -15,7 +15,7 @@ else{
 //Database login
 require_once('/home/hamby/auth/dbinfo.php');
 //Maximum rows allowed on one page
-$pagehigh = 49;
+$pagehigh = 29;
 $pagecount = 0;
 $totalpages = 0;
 $totalrec = 0;
@@ -61,6 +61,7 @@ $header = '
 </table>
 </div>
 ';
+//Define How many Rows this Header takes
 $header_rows = 1;
 /********************************************************
 *							*
@@ -71,6 +72,18 @@ $blankrows = '
 	<tr>
 		<td class="blank_rows"></td>
 	</tr>
+';
+
+/********************************************************
+*							*
+*		Approval Line				*
+*							*
+********************************************************/
+$approval = '
+	<div class="approval">
+		</p>
+		PREP BY_______/__ APRLS_______/__ : ENG_______/__ QC_______/__ PROD_______/__
+	</div>
 ';
 ?>
 
@@ -453,7 +466,7 @@ for($m = 1;$mrow = mysql_fetch_array($mresult);$m++)
 ?>
 <?php
 	}
-	//Add Blank Spaces for Skipped Job numbers
+	//Add Blank Spaces for Skipped Material numbers
 	else
 	{
 		//Keep adding blank numbers until a valid job is found
@@ -759,6 +772,7 @@ if($frow[0])
 </div>
 <?php
 }
+echo $approval;
 ?>
 
 
