@@ -77,7 +77,7 @@ for ($i = 0;$row = mysql_fetch_array($result); $i++)
 	<tr>
 	<td><input type="text" id="<?php echo $i;?>" name="no" size="15" value="<?php echo $row['no'];?>"/></td>
 	<td><input type="text" id="<?php echo $i;?>" name="rev" size="5" value="<?php echo $row['rev'];?>"/></td>
-	<td><input type="text" id="<?php echo $i;?>" name="eo" size="30" value="<?php echo $row['eo'];?>"/></td>
+	<td><input type="text" id="<?php echo $i;?>" name="eo" size="60" value="<?php echo $row['eo'];?>"/></td>
 	<td><input type="text" id="<?php echo $i;?>" name="itar" size="4" value="<?php echo $row['itar'];?>"/></td>
 	<td><input type="text" id="<?php echo $i;?>" name="prog" size="15" value="<?php echo $row['prog'];?>"/></td>
 	<td><input type="text" id="<?php echo $i;?>" name="status" size="10" value="<?php echo $row['status'];?>"/></td>
