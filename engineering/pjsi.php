@@ -715,8 +715,9 @@ $main = "SELECT s.no,s.rev,s.chg,s.note,s.type,s.status FROM $sptable s UNION SE
 $fsql = "SELECT * FROM ($list) list JOIN ($main) main ON list.spec = main.no ORDER BY spec";
 $fresult = mysql_query($fsql);
 //Check to see if Flysheet needs to be printed
-$frow = mysql_fetch_array($fresult);
-if($frow[0])
+$fcresult = mysql_query($fsql);
+$fcrow = mysql_fetch_array($fcresult);
+if($fcrow[0])
 {
 ?>
 	<div class="flysheet">
