@@ -15,7 +15,7 @@ else{
 //Database login
 require_once('/home/hamby/auth/dbinfo.php');
 //Maximum rows allowed on one page
-$pagehigh = 29;
+$pagehigh = 49;
 $pagecount = 0;
 $totalpages = 0;
 $totalrec = 0;
@@ -426,6 +426,8 @@ if($pagecounter + $mlast > $pagehigh)
 	//Add New Page Header row (this includes a page break)
 	echo $header;$pagecounter = $pagecounter + $header_rows;
 	echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+	//Set Pagecounter back to 0
+	$pagecounter = 0;
 }
 else
 {

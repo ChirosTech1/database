@@ -167,9 +167,9 @@ function UpdateLine(q,e)
 				obj.focus();
 			}
 		}
-		if(q != 'update' && q != 'mupdate' && q != 'supdate' && q != 'Delete' && q != 'dDelete' && q != 'dupdate')
+		if(q != 'update' && q != 'mupdate' && q != 'supdate' && q != 'Delete' && q != 'dDelete' && q != 'dupdate' && q != 'New')
 		{
-			if(q == 'New ' + formtype || q == 'mNew' || q == 'sNew')
+			if(q == 'New' + formtype || q == 'mNew' || q == 'sNew')
 			{
 			EditForm(q);
 			}
