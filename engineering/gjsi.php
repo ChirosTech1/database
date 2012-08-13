@@ -8,6 +8,7 @@ $primaryfield = 'no';
 $q = $_POST['q'];
 $limit = mysql_real_escape_string($_POST['limit']);
 $menu = mysql_real_escape_string($_POST['menu']);
+echo $menu;
 //Get Field names from Table
 $fieldsql = "SELECT * FROM $table LIMIT 1";
 $fieldresult = mysql_query($fieldsql);
@@ -61,7 +62,7 @@ switch ($q)
 		$row = mysql_fetch_array($result);
 		//Add New Row if not already in system
 		if(!$row)
-		mysql_query("INSERT INTO $table ($primaryfield) VALUES ($menu)");
+		mysql_query("INSERT INTO $table ($primaryfield) VALUES ('$menu')");
 		//Display new data
 		$sql = "SELECT * FROM $table WHERE $primaryfield = '$menu'";
 		//Create Limit Variable for New Enry
