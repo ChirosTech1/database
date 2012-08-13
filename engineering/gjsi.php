@@ -8,7 +8,6 @@ $primaryfield = 'no';
 $q = $_POST['q'];
 $limit = mysql_real_escape_string($_POST['limit']);
 $menu = mysql_real_escape_string($_POST['menu']);
-echo $menu;
 //Get Field names from Table
 $fieldsql = "SELECT * FROM $table LIMIT 1";
 $fieldresult = mysql_query($fieldsql);
