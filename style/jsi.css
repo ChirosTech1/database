@@ -1,7 +1,11 @@
 div,table,th,td
 {
 	font-family:"Courier New", Courier, Monospace;
-	font-size:10pt;
+	font-size:8pt;
+}
+table,th,td
+{
+	border-style:solid;
 }
 div.page_header
 {
@@ -9,7 +13,12 @@ div.page_header
 }
 table.page_header
 {
+	border-style:none;
 	width:100%;
+}
+th.page_header,td.page_header
+{
+	border-style:none;
 }
 div.add_page_header
 {
@@ -17,6 +26,7 @@ div.add_page_header
 }
 table.add_page_header
 {
+	border-style:none;
 	page-break-before:always;
 }
 div.blank_rows
@@ -25,13 +35,11 @@ div.blank_rows
 table.blank_rows
 {
 	width:100%;
-	border-style:dashed;
 	border-width:1px;
 	border-collapse:collapse;
 }
 td.blank_rows
 {
-	border-style:dashed;
 	border-width:1px;
 	height:16px;
 }
@@ -41,18 +49,15 @@ div.procedure
 table.procedure
 {
 	width:100%;
-	border-style:dashed;
 	border-width:1px;
 	border-collapse:collapse;
 }
 th.procedure
 {
-	border-style:dashed;
 	border-width:1px;
 }
 td.procedure
 {
-	border-style:dashed;
 	border-width:1px;
 }
 div.material
@@ -61,18 +66,15 @@ div.material
 table.material
 {
 	width:100%;
-	border-style:dashed;
 	border-width:1px;
 	border-collapse:collapse;
 }
 th.material
 {
-	border-style:dashed;
 	border-width:1px;
 }
 td.material
 {
-	border-style:dashed;
 	border-width:1px;
 }
 div.specs
@@ -81,18 +83,15 @@ div.specs
 table.specs
 {
 	width:100%;
-	border-style:dashed;
 	border-width:1px;
 	border-collapse:collapse;
 }
 th.specs
 {
-	border-style:dashed;
 	border-width:1px;
 }
 td.specs
 {
-	border-style:dashed;
 	border-width:1px;
 /*	white-space:nowrap;*/
 }
@@ -102,17 +101,14 @@ div.flysheet
 table.flysheet
 {
 	width:100%;
-	border-style:dashed;
 	border-width:1px;
 	border-collapse:collapse;
 }
 th.flysheet
 {
-	border-style:dashed;
 	border-width:1px;
 }
 td.flysheet
 {
-	border-style:dashed;
 	border-width:1px;
 }

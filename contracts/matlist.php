@@ -1,15 +1,14 @@
 <html>
-<head><h1>Part Number Drawing List</h1></head>
+<head><h1>Part Number Material List</h1></head>
 <script type="text/javascript" src="../script/ajax.js"></script>
 <script type="text/javascript">
 //<![CDATA{
-var formtype = "Drawing";
-var mainfile = "documentctrl";
-var mainform = "gdrawingslist.php";
-var lineform = "gldrawingslist.php";
+var formtype = "Part Number";
+var mainfile = "contracts";
+var mainform = "gmatlist.php";
+var lineform = "glmatlist.php";
 var noteform = "";
-var printform = "pspeclist.php";
-var selectfield = "drawing";
+var printform = "pmatlist";
 var table = "pn";
 var field = "no";
 var field2 = "des";
@@ -41,14 +40,14 @@ else
 require_once('/home/hamby/auth/dbinfo.php');
 //Define Variables
 //Define SQL for drop down list
-$sql = "SELECT no FROM drawing ORDER BY no";
+$sql = "SELECT no FROM pn ORDER BY no";
 $result = mysql_query($sql);
 ?>
+<p>
 <input type="button" value="Prev" onclick="UpdateForm(this.value)"/>
 <input type="button" value="Next" onclick="UpdateForm(this.value)"/>
-<input type="button" value="Edit" onclick="EditForm(this.value)"/>
-<form id="printform">
-<input type="button" value="Print Drawing" onclick="PrintForm()"/>
+<form id="printform"/>
+<input type="button" value="Print Material" onclick="PrintForm()"/>
 </form>
 <p/>
 <form id = "main">
@@ -72,7 +71,7 @@ while ($row = mysql_fetch_array($result))
 </tr>
 </table>
 <input type="hidden" name="limit"/>
-<input type="hidden" id="id" name="id"/>
+<input type="hidden" name="id" id="id"/>
 <table>
 <tr>
 <th>Part Number</th>

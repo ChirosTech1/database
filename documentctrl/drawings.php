@@ -82,12 +82,12 @@ while ($row = mysql_fetch_array($result))
 <td><input type="text" name="cust" onchange="UpdateForm('update')"/></td>
 </tr>
 <tr>
-<th>Change</th>
-<th colspan="2">Note</th>
+<th colspan="2">Change</th>
+<th>Note</th>
 </tr>
 <tr>
-<td><input type="text" name="chg" onchange="UpdateForm('update')"/></td>
-<td colspan="2"><input type="text" name="note" onchange="UpdateForm('update')"/></td>
+<td colspan="2"><input type="text" size="50" name="chg" onchange="UpdateForm('update')"/></td>
+<td><input type="text" name="note" onchange="UpdateForm('update')"/></td>
 </tr>
 </table>
 </form>

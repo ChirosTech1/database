@@ -109,7 +109,7 @@ for ($i = 0;$row = mysql_fetch_array($result); $i++)
 	<input type="hidden" id="<?php echo $i;?>" name="id" value="<?php echo $row['id'];?>"/>
 	<td><input type="text" id="<?php echo $i;?>" name="drawing" size="20" value="<?php echo $row['drawing'];?>"/></td>
 	<td><input type="text" id="<?php echo $i;?>" name="rev" size="10" value="<?php echo $row['rev'];?>"/></td>
-	<td><input type="text" id="<?php echo $i;?>" name="chg" size="10" value="<?php echo $row['chg'];?>"/></td>
+	<td><input type="text" id="<?php echo $i;?>" name="chg" size="50" value="<?php echo $row['chg'];?>"/></td>
 	<td><input type="text" id="<?php echo $i;?>" name="note" size=50" value="<?php echo $row['note'];?>"/></td>
 	<td><input type="button" id="<?php echo $i;?>" name="delete" value="Delete Drawing" onclick="UpdateLine(this.value,this)"/><td>
 	</tr>

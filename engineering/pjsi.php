@@ -61,6 +61,7 @@ $header = '
 </table>
 </div>
 ';
+//Define How many Rows this Header takes
 $header_rows = 1;
 /********************************************************
 *							*
@@ -71,6 +72,18 @@ $blankrows = '
 	<tr>
 		<td class="blank_rows"></td>
 	</tr>
+';
+
+/********************************************************
+*							*
+*		Approval Line				*
+*							*
+********************************************************/
+$approval = '
+	<div class="approval">
+		</p>
+		PREP BY_______/__ APRLS_______/__ : ENG_______/__ QC_______/__ PROD_______/__
+	</div>
 ';
 ?>
 
@@ -85,31 +98,31 @@ $blankrows = '
 --!>
 <div class="page_header">
 <table class="page_header">
-	<tr>
-		<td>PTH#______________</td>
-		<th rowspan="2">JOB SUMMARY AND INSPECTION</th>
-		<td>JSI#___________________</td>
+	<tr class="page_header">
+		<td class="page_header">PTH#______________</td>
+		<th class="page_header" rowspan="2">JOB SUMMARY AND INSPECTION</th>
+		<td class="page_header">JSI#___________________</td>
 	</tr><?php $pagecounter++;?>
-	<tr>
-		<td>Final Assembly: <?php echo $row['final'];?></td>
-		<td>Page 1 of ---</td>
-	</tr><?php $pagecounter++;?>
-</table>
-<table class="page_header">
-	<tr>
-		<td>Date Due:______________</td>
-		<td>Qty Due:_____</td>
-		<td>Qty:____</td>
-		<td>SN:______________</td>
-		<td>WO:______________</td>
-		<td>Cust:_______________</td>
+	<tr class="page_header">
+		<td class="page_header">Final Assembly: <?php echo $row['final'];?></td>
+		<td class="page_header">Page 1 of ---</td>
 	</tr><?php $pagecounter++;?>
 </table>
 <table class="page_header">
-	<tr>
-		<td>Part Number: <?php echo $row['no'];?></td>
-		<td>Remarks:  <?php echo $row['rmks'];?></td>
-		<td>Run__Panels @  <?php echo $row['ppp'];?> Parts/Panel</td>
+	<tr class="page_header">
+		<td class="page_header">Date Due:______________</td>
+		<td class="page_header">Qty Due:_____</td>
+		<td class="page_header">Qty:____</td>
+		<td class="page_header">SN:______________</td>
+		<td class="page_header">WO:______________</td>
+		<td class="page_header">Cust:_______________</td>
+	</tr><?php $pagecounter++;?>
+</table>
+<table class="page_header">
+	<tr class="page_header">
+		<td class="page_header">Part Number: <?php echo $row['no'];?></td>
+		<td class="page_header">Remarks:  <?php echo $row['rmks'];?></td>
+		<td class="page_header">Run__Panels @  <?php echo $row['ppp'];?> Parts/Panel</td>
 	</tr><?php $pagecounter++;?>
 </table>
 </div>
@@ -339,7 +352,7 @@ $material_header = '
 <table class="material">
 	<tr>
 		<th class="material" colspan="7">Material List</th>
-		<th class="material" width="500px"></th>
+		<th class="material" width="200px"></th>
 	</tr>
 	<tr>
 		<th class="material">##</th>
@@ -347,7 +360,7 @@ $material_header = '
 		<th class="material">PN</th>
 		<th class="material" colspan="2">Description</th>
 		<th class="material">Specification</th>
-		<th class="material">Certs</th>
+		<th class="material" width="70">Certs</th>
 		<th class="material"></th>
 	</tr>
 ';
@@ -413,6 +426,8 @@ if($pagecounter + $mlast > $pagehigh)
 	//Add New Page Header row (this includes a page break)
 	echo $header;$pagecounter = $pagecounter + $header_rows;
 	echo $material_header;$pagecounter = $pagecounter + $material_header_rows;
+	//Set Pagecounter back to 0
+	$pagecounter = 0;
 }
 else
 {
@@ -453,7 +468,7 @@ for($m = 1;$mrow = mysql_fetch_array($mresult);$m++)
 ?>
 <?php
 	}
-	//Add Blank Spaces for Skipped Job numbers
+	//Add Blank Spaces for Skipped Material numbers
 	else
 	{
 		//Keep adding blank numbers until a valid job is found
@@ -697,13 +712,14 @@ $dptable = 'drawing';
 *Change to $no where 0800-620-004		*
 *						*
 ************************************************/
-$list = "SELECT * FROM $stable s WHERE s.no='0800-620-004' UNION SELECT * FROM $dtable d WHERE d.no='0800-620-004'";
+$list = "SELECT * FROM $stable s WHERE s.no='$no' UNION SELECT * FROM $dtable d WHERE d.no='$no'";
 $main = "SELECT s.no,s.rev,s.chg,s.note,s.type,s.status FROM $sptable s UNION SELECT d.no,d.rev,d.chg,d.note,d.cust,d.status FROM $dptable d";
 $fsql = "SELECT * FROM ($list) list JOIN ($main) main ON list.spec = main.no ORDER BY spec";
 $fresult = mysql_query($fsql);
 //Check to see if Flysheet needs to be printed
-$frow = mysql_fetch_array($fresult);
-if($frow[0])
+$fcresult = mysql_query($fsql);
+$fcrow = mysql_fetch_array($fcresult);
+if($fcrow[0])
 {
 ?>
 	<div class="flysheet">
@@ -759,6 +775,7 @@ if($frow[0])
 </div>
 <?php
 }
+echo $approval;
 ?>
 
 

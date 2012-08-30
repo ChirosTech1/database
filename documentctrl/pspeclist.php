@@ -59,7 +59,7 @@ while($row = mysql_fetch_array($result))
 	<tr>
 	<td><input type="text" name="pn" size="20" value="<?php echo $row['no'];?>"/></td>
 	<td><input type="text" name="rev" size="4" value="<?php echo $row['rev'];?>"/></td>
-	<td><input type="text" name="chg" size="30" value="<?php echo $row['chg'];?>"/></td>
+	<td><input type="text" name="chg" size="60" value="<?php echo $row['chg'];?>"/></td>
 	<td><input type="text" name="type" size="10" value="<?php echo $row['type'];?>"/></td>
 	<td><input type="text" name="status" size="5" value="<?php if($row['status']) echo $row['status'];else echo "GO";?>"/></td>
 	</tr>
