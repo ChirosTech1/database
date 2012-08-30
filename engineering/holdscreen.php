@@ -38,7 +38,7 @@ switch ($q)
 		mysql_query("UPDATE pn SET status = 'Hold' WHERE no IN (SELECT final FROM jsi UNION SELECT no FROM jsi WHERE no IN (SELECT pn FROM jsispec WHERE spec = '$no'))");
 		break;
 	case "Hold Material":
-		echo "This feature is not yet available. Please contact your system administrator."
+		echo "This feature is not yet available. Please contact your system administrator.";
 		break;
 	case "Hold PN":
 		//Get Variables
@@ -61,7 +61,7 @@ switch ($q)
 	<th></th>
 	</tr>
 	<tr>
-	<td>Docuement</td>
+	<td>Document</td>
         <!--Add Select option for List of Material--!>
         <td><select name="document">
                 <option value="default">Select a Document</option>
