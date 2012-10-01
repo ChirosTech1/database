@@ -145,14 +145,14 @@ for($i = 0; $i < $qnum; ++$i)
 </table>
 <table class="qc">
 <tr>
-<th class="qc" colspan="2" width="40%">Attachement 2 Clause</th>
+<th class="qc" colspan="2" width="40%">Attachment 2 Clause</th>
 <td class="qc" colspan="2" width="60%"><?php echo $qal;?></td>
 </tr>
 </table>
 <table class="qc">
 <tr>
 <td width="25%"></td>
-<th class="qc" colspan="2" width="15%">HP165</th>
+<th class="qc" colspan="2" width="15%">HP0165</th>
 <td class="qc" colspan="2" width="35%"><?php echo $rec;?></td>
 <td width="25%"></td>
 </tr>

@@ -17,7 +17,7 @@ $printsel = 2;
 //Database login
 require_once('/home/hamby/auth/dbinfo.php');
 //Maximum rows allowed on one page
-$pagehigh = 22;
+$pagehigh = 24;
 $pagecount = 0;
 $totalpages = 0;
 $totalrec = 0;
