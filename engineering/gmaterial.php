@@ -83,7 +83,7 @@ switch ($q)
 			{
 				$$mfield[$i] = $mrow[$i];
 			}
-		mysql_query("INSERT INTO $table (no,type,qal,rec,code) VALUES ('$material','$type','$qal','$rec','$code')");
+		mysql_query("INSERT INTO $table (no,type,qal,rec,code,insp) VALUES ('$material','$type','$qal','$rec','$code','$insp')");
 		$limit = 0;
 		$sql = "SELECT * $dateformat FROM $table WHERE no = '$material'";
 		}

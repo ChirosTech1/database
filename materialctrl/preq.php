@@ -153,15 +153,15 @@ for($i = 0; $i < $qnum; ++$i)
 <tr>
 <td width="25%"></td>
 <th class="qc" colspan="2" width="15%">HP0165</th>
-<td class="qc" colspan="2" width="35%"><?php echo $rec;?></td>
+<td class="qc" colspan="2" width="35%"><?php echo $rec . ", " . $insp;?></td>
 <td width="25%"></td>
 </tr>
 </table>
 <table class="qc">
 <tr>
 <td width="25%"></td>
-<th class="qc" colspan="2" width="25%">P/N Revision</th>
-<td class="qc" colspan="2" width="25%">_</td>
+<th class="qc" colspan="2" width="25%">Revision</th>
+<td class="qc" colspan="2" width="25%"> </td>
 <td width="25%"></td>
 </tr>
 </table>

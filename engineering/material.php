@@ -100,12 +100,14 @@ while ($row = mysql_fetch_array($result))
 <th>Obsolete</th>
 <th>QAL</th>
 <th>Receiving Insp.</th>
+<th>Inspection Procedure</th>
 </tr>
 <tr>
 <td><input type="text" name="stk" onchange="UpdateForm('update')"/></td>
 <td><input type="text" name="obs" onchange="UpdateForm('update')"/></td>
 <td><input type="text" name="qal" onchange="UpdateForm('update')"/></td>
 <td><input type="text" name="rec" onchange="UpdateForm('update')"/></td>
+<td><input type="text" name="insp" onchange="UpdateForm('update')"/></td>
 </tr>
 </table>
 </form>

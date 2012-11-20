@@ -375,9 +375,7 @@ $material_header_rows = 2;
 $mextra = 4;
 
 //Get Materials based on Part Number
-$msql = "SELECT $mtable.*, material.pn AS matpn, material.des AS matdes, material.type AS mattype, material.spec AS matspec FROM $mtable INNER JOIN material ON $mtable.mat = material.no WHERE $mtable.pn = '$no' ORDER BY no";
-
-
+$msql = "SELECT $mtable.*, material.pn AS matpn, material.des AS matdes, material.type AS mattype, material.spec AS matspec FROM $mtable INNER JOIN material ON $mtable.mat = material.no WHERE $mtable.pn = '$no' GROUP BY pn ORDER BY no";
 //Set Max character row widths
 $qtymaxrow = 9;
 $matmaxrow = 45;
@@ -591,7 +589,7 @@ for($e = 0;$e!=$mextra;$e++)
 *	B/P and Specs List			*
 *						*
 ************************************************/
-$ssql = "SELECT *, LENGTH(let) AS len FROM $stable WHERE pn = '$no' ORDER BY len, let";
+$ssql = "SELECT *, LENGTH(let) AS len FROM $stable WHERE pn = '$no' GROUP BY let ORDER BY len, let";
 $sresult = mysql_query($ssql);
 //Specifiy Letter variable to use as filler for blank spots
 $let = "A";

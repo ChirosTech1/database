@@ -253,8 +253,17 @@ switch ($q)
 		$jobno = mysql_real_escape_string($_POST['sline']);
 		//Get Letter value for Spec list
 		//See if the specification is already on the list
-		$specification = mysql_fetch_array(mysql_query("SELECT let FROM $stable WHERE pn = '$linkvalue' AND spec = '$spec'"));
+		//Check for Supp. Drawings duplicate spec value
+		if($des == 'Drawing' || $des == 'Supp Drawing')
+		{
+			$specification = mysql_fetch_array(mysql_query("SELECT let FROM $stable WHERE pn = '$linkvalue' AND spec = '$spec' AND des = '$des'"));
+		}
+		else
+		{
+			$specification = mysql_fetch_array(mysql_query("SELECT let FROM $stable WHERE pn = '$linkvalue' AND spec = '$spec'"));
+		}
 		$specification = $specification['let'];
+		//Create New Letter for Spec
 		if(!$specification){
 			$let = mysql_fetch_array(mysql_query("SELECT let FROM $stable WHERE pn = '$linkvalue 'ORDER BY LENGTH(let) DESC, let DESC LIMIT 1"));
 			$let = $let['let'];
@@ -265,7 +274,7 @@ switch ($q)
 		}
 		else
 			$let = $specification;
-		//Insert New Line Date
+		//Insert New Line Data
 		mysql_query("INSERT INTO $stable (pn,let,jobno,spec,des) VALUES ('$linkvalue','$let','$jobno','$spec','$des')");
 		//Update Mat/Spec Info for Job Description
 		$matnos = mysql_query("SELECT no FROM $mtable WHERE pn = '$linkvalue' AND jobno = '$jobno' ORDER BY no");
